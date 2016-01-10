@@ -192,6 +192,14 @@ public class BanqueDaoImpl implements IBanqueDao {
 		req.setParameter("x", idClient);
 		return req.getResultList();
 	}
+	
+	@Override
+	public List<Compte> getAccountsByEmpl(Long idEmpl) {
+		Query req = em
+				.createQuery("select c from Compte c where c.employe.idPersonne = :x");
+		req.setParameter("x", idEmpl);
+		return req.getResultList();
+	}
 
 
 	@Override
@@ -396,6 +404,8 @@ public class BanqueDaoImpl implements IBanqueDao {
 		req.setParameter("x", name);
 		return  (User) req.getResultList().get(0);
 	}
+
+	
 
 
 	

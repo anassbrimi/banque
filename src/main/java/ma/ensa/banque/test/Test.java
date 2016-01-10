@@ -1,20 +1,15 @@
 package ma.ensa.banque.test;
 
-import ma.ensa.banque.dao.IBanqueDao;
-import ma.ensa.banque.entities.Client;
-import ma.ensa.banque.service.IBanqueService;
-
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Test {
 
 	public static void main(String[] args) {
 
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
-				new String[] { "applicationContext.xml" });
-		IBanqueDao dao = (IBanqueDao) context.getBean("banqueDao");
-		IBanqueService service = (IBanqueService) context
-				.getBean("banqueService");
+//		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
+//				new String[] { "applicationContext.xml" });
+//		IBanqueDao dao = (IBanqueDao) context.getBean("banqueDao");
+//		IBanqueService service = (IBanqueService) context
+//				.getBean("banqueService");
 		// List<Compte> cpts = dao.getAllAccount();
 		//
 		// for (Compte c : cpts) {
@@ -97,13 +92,13 @@ public class Test {
 //		Compte c = new Compte(1800);
 //		dao.addAccount(c, (long)2, (long)4);
 //		dao.deleteAccount((long) 1);
-	
-//		service.verser(555548, (long)1, (long)4);
-//		service.retirer(5684, (long)1, (long)4);
-//		service.verser(144, (long)1, (long)4);
-//		service.retirer(7846, (long)1, (long)4);
-//		service.verser(40684, (long)1, (long)4);
-//		service.retirer(684, (long)1, (long)4);
+//	
+//		service.verser(100, (long)1, (long)4);
+//		
+//		service.verser(8440, (long)1, (long)4);
+//		
+//		service.verser(684, (long)1, (long)4);
+		
 //	Client c = new Client("AIT AL BRIMI", "Anass", "0655258921", "Agadir", "anassbrimi992@gmail.com");
 //	dao.addClient(c);
 		
@@ -111,11 +106,7 @@ public class Test {
 //		dao.addOperation(new Retrait(155, false), cp.getIdCompte(), (long)4);
 //		cp.setSolde(cp.getSolde() + 155);
 		
-		Client c = dao.getClientById((long)5);
-		System.out.println(c.getIdPersonne());
-		c.setNomPersonne("Brimi");
-		dao.updateClient(c);
-		
+
 	}
 
 }

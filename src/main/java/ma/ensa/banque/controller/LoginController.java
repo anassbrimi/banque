@@ -17,9 +17,6 @@ public class LoginController {
 		return "login";
 	}
 	
-	@RequestMapping(value = "/auth")
-	public String index(Model model) {
-		return "/client/home";
-	}
+
 	
 }

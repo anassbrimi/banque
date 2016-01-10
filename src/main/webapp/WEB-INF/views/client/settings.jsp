@@ -66,7 +66,7 @@
 					<div class="col-md-6">
 						<div>
 							<f:form modelAttribute="client" method="post"
-								action="saveClient" class="form-horizontal" role="form">
+								action="editClient" class="form-horizontal" role="form">
 								
 								<div class="form-group">
 								

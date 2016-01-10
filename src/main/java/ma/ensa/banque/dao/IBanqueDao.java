@@ -38,6 +38,7 @@ public interface IBanqueDao {
 	public void deleteAccount(Long idCompte);
 	public Compte getAccountById(Long idCompte);
 	public List<Compte> getAccountsByClient(Long idClient);
+	public List<Compte> getAccountsByEmpl(Long idEmpl);
 	public List<Compte> getAllAccount();
 	
 	//Gestion Des Operations

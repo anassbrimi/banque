@@ -16,6 +16,8 @@
 <spring:url value="/resources/js/bootstrap.min.js" var="bootJs"></spring:url>
 <spring:url value="/resources/js/espaceClient.js" var="espaceClientJs"></spring:url>
 <spring:url value="/resources/js/js.js" var="Js"></spring:url>
+<spring:url value="/resources/js/angular.min.js" var="AngJs"></spring:url>
+
 
 
 
@@ -30,13 +32,13 @@
 <script src="${Js}"></script>
 <script src="${bootJs}"></script>
 <script src="${espaceClientJs}"></script>
-
+<script src="${AngJs}"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 
 <title>Espace Client</title>
 </head>
-<body>
+<body ng-app="filtApp">
 	
 
 	<div id="wrapper" >
@@ -80,6 +82,7 @@
 											<div class="col-xs-9 text-right">
 
 												<div class="huge">
+												
 													${solde}<b> MAD</b>
 												</div>
 												<div>

@@ -13,6 +13,7 @@
 <spring:url value="/resources/css/font-awesome.min.css" var="font"></spring:url>
 <spring:url value="/resources/js/bootstrap.min.js" var="bootJs"></spring:url>
 <spring:url value="/resources/js/espaceClient.js" var="espaceClientJs"></spring:url>
+<spring:url value="/resources/js/angular.min.js" var="AngJs"></spring:url>
 
 
 
@@ -25,6 +26,7 @@
 <link rel="stylesheet" href="${font}">
 <script src="${bootJs}"></script>
 <script src="${espaceClientJs}"></script>
+<script src="${AngJs}"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 
@@ -74,7 +76,6 @@
 
 											<thead>
 												<tr>
-
 													<th>TYPE</th>
 													<th>DATE</th>
 													<th>EMPLOYE</th>
@@ -85,11 +86,11 @@
 												<c:forEach items="${retraits}" var="op">
 													<tr>
 
-														<td>D</td>
+														<td><b>DEBIT</b></td>
 														<td>${op.dateOperation}</td>
 
 														<td>${op.employe.nomPersonne}</td>
-														<td>${op.montant} <b> MAD</b></td>
+														<td>${op.montant}<b> MAD</b> </td>
 													</tr>
 
 												</c:forEach>
@@ -122,7 +123,7 @@
 												<c:forEach items="${versements}" var="op">
 													<tr>
 
-														<td>C</td>
+														<td><b>CREDIT</b></td>
 														<td>${op.dateOperation}</td>
 														<td>${op.employe.nomPersonne}</td>
 														<td>${op.montant}<b> MAD</b></td>
