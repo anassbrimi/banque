@@ -11,12 +11,15 @@ import ma.ensa.banque.entities.Operation;
 import ma.ensa.banque.model.BanqueForm;
 import ma.ensa.banque.service.IBanqueService;
 
+import org.springframework.asm.commons.Method;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/employe")
@@ -52,9 +55,9 @@ public class EmployeController {
 		return "employe/clients";
 	}
 
-	@RequestMapping(value = "/searchClient")
-	public String searchClient(Model model, @Valid Client c) {
-		List<Client> clts = service.readClientsByKeyWord(c.getAdressePersonne());
+	@RequestMapping(value = "/searchClient", method = RequestMethod.POST)
+	public String searchClient(Model model, @RequestParam String keywords) {
+		List<Client> clts = service.readClientsByKeyWord(keywords);
 
 		model.addAttribute("client", new Client());
 		model.addAttribute("clients", clts);

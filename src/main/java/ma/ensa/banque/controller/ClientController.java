@@ -15,6 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -106,9 +107,9 @@ public class ClientController {
 	}
 
 	@RequestMapping(value = "/editClient")
-	public String updateSettings(Model model, Client client) {
+	public String updateSettings(Model model,@ModelAttribute("client") Client client) {
 		if (client.getIdPersonne() != null) {
-			
+			System.out.println(client.getTelePersonne());
 			service.mergeClient(client);
 		}
 

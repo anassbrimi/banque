@@ -3,6 +3,7 @@ package ma.ensa.banque.entities;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
@@ -18,7 +19,7 @@ public class Employe extends Personne{
 	//Gestion Des Relations
 	@ManyToOne
 	private Employe supEmpl;
-	@OneToMany(mappedBy = "employe")
+	@OneToMany(mappedBy = "employe",  cascade = CascadeType.ALL)
 	private Collection<Compte> comptes = new ArrayList<Compte>();
 	
 

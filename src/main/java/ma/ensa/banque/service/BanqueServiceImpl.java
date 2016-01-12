@@ -70,7 +70,9 @@ public class BanqueServiceImpl implements IBanqueService {
 	@Override
 	public void mergeClient(Client c) {
 		// TODO Auto-generated method stub
+		System.out.println(c.getTelePersonne() + "******************************************");
 		dao.updateClient(c);
+		System.out.println(c.getTelePersonne() + "***222222222222222222222222222222222222*******");
 	}
 
 	@Override

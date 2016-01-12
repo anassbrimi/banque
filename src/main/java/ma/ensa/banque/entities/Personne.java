@@ -100,4 +100,15 @@ public class Personne implements Serializable {
 		this.user = user;
 	}
 
+	@Override
+	public String toString() {
+		return "Personne [idPersonne=" + idPersonne + ", nomPersonne="
+				+ nomPersonne + ", prenomPersonne=" + prenomPersonne
+				+ ", telePersonne=" + telePersonne + ", adressePersonne="
+				+ adressePersonne + ", emailPersonne=" + emailPersonne
+				+ ", user=" + user + "]";
+	}
+
+	
+	
 }
