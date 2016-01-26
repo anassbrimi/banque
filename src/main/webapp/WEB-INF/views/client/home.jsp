@@ -36,7 +36,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 
-<title>Espace Client</title>
+<title>Espace Client - Home</title>
 </head>
 <body ng-app="filtApp">
 	

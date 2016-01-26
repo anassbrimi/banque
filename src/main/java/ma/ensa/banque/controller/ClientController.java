@@ -35,6 +35,7 @@ public class ClientController {
 				.readUserByUserName(name);
 		Client c = service.readClientById(service.readPersonneByUser(
 				user.getIdUser()).getIdPersonne());
+		
 		Compte cpt = service.readAccountsByClient(c.getIdPersonne()).get(
 				0);
 		List<Operation> ops = service.readOperationsByAccount(
@@ -63,9 +64,9 @@ public class ClientController {
 		List<Retrait> retraits = new ArrayList<Retrait>();
 		List<Versement> versements = new ArrayList<Versement>();
 		for (Operation op : ops) {
-			if (op.toString() == "Versement") {
+			if (op.toString() == "CREDIT") {
 				versements.add((Versement) op);
-			} else if (op.toString() == "Retrait") {
+			} else if (op.toString() == "DEBIT") {
 				retraits.add((Retrait) op);
 			}
 		}
@@ -108,8 +109,14 @@ public class ClientController {
 
 	@RequestMapping(value = "/editClient")
 	public String updateSettings(Model model,@ModelAttribute("client") Client client) {
+		User userS = (User) SecurityContextHolder.getContext()
+				.getAuthentication().getPrincipal();
+		String name = userS.getUsername();
+		ma.ensa.banque.entities.User user = service
+				.readUserByUserName(name);
 		if (client.getIdPersonne() != null) {
 			System.out.println(client.getTelePersonne());
+			client.setUser(user);
 			service.mergeClient(client);
 		}
 

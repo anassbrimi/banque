@@ -29,7 +29,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 
-<title>Espace Client - Settings</title>
+<title>Espace Employe - Add Client</title>
 </head>
 <body>
 	<div id="wrapper">
@@ -40,11 +40,13 @@
 			<ul class="nav sidebar-nav">
 				<li class="sidebar-brand"><a href="#"> Project </a></li>
 				<li><a href="home"><i class="fa fa-home"></i> Home</a></li>
-				<li><a href="transaction"><i class="fa fa-money"></i>
+				<li><a href="addClient"><i class="fa fa-plus"></i> Add Client</a></li>
+				<li><a href="clients"><i class="fa fa-users"></i> Clients</a></li>
+				<li><a href="accounts"><i class="fa fa-credit-card"></i>
+						Accounts</a></li>
+				<li><a href="transactions"><i class="fa fa-money"></i>
 						Transactions</a></li>
-				<li><a href="cashRetracted"><i class="fa fa-credit-card"></i>
-						Cash-Retracted</a></li>
-				<li><a href="settings"><i class="fa fa-cogs"></i> Settings</a></li>
+				<!-- 				<li><a href="settings"><i class="fa fa-cogs"></i> Settings</a></li> -->
 				<li><a href="<c:url value="/j_spring_security_logout" />"><i
 						class="fa fa-sign-out"></i> Sign Out</a></li>
 			</ul>
@@ -65,62 +67,74 @@
 					<div class="col-md-3"></div>
 					<div class="col-md-6">
 						<div>
-							<f:form modelAttribute="client" method="post"
-								action="editClient" class="form-horizontal" role="form">
+							<f:form modelAttribute="banqueForm" method="post"
+								action="saveClient" class="form-horizontal" role="form">
 								
 								<div class="form-group">
+								<h3>Client</h3>
 								
-								<f:hidden path="idPersonne"/>
 									<label class="control-label col-sm-2" for="Nom">Last Name:</label>
 									<div class="col-sm-8">
-										<f:input path="nomPersonne" class="form-control" />
+										<f:input path="client.nomPersonne" class="form-control" />
 									</div>
 									<div class="col-sm-2">
-										<f:errors path="nomPersonne" cssClass="errors"></f:errors>
+										<f:errors path="client.nomPersonne" cssClass="errors"></f:errors>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="control-label col-sm-2" for="Prénom">First Name:</label>
 
 									<div class="col-sm-8">
-										<f:input path="prenomPersonne" class="form-control" />
+										<f:input path="client.prenomPersonne" class="form-control" />
 									</div>
 									<div class="col-sm-2">
-										<f:errors path="prenomPersonne" cssClass="errors"></f:errors>
+										<f:errors path="client.prenomPersonne" cssClass="errors"></f:errors>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="control-label col-sm-2" for="Téléphone">Mobile:</label>
 									<div class="col-sm-8">
-										<f:input path="telePersonne" class="form-control" />
+										<f:input path="client.telePersonne" class="form-control" />
 									</div>
 									<div class="col-sm-2">
-										<f:errors path="telePersonne" cssClass="errors"></f:errors>
+										<f:errors path="client.telePersonne" cssClass="errors"></f:errors>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="control-label col-sm-2" for="mail">E-mail:</label>
 									<div class="col-sm-8">
-										<f:input path="emailPersonne" class="form-control" />
+										<f:input path="client.emailPersonne" class="form-control" />
 									</div>
 									<div class="col-sm-2">
-										<f:errors path="emailPersonne" cssClass="errors"></f:errors>
+										<f:errors path="client.emailPersonne" cssClass="errors"></f:errors>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="control-label col-sm-2" for="Adresse">Adresse:</label>
 									<div class="col-sm-8">
-										<f:textarea path="adressePersonne" class="form-control" />
+										<f:textarea path="client.adressePersonne" class="form-control" />
 									</div>
 									<div class="col-sm-2">
-										<f:errors path="adressePersonne" cssClass="errors"></f:errors>
+										<f:errors path="client.adressePersonne" cssClass="errors"></f:errors>
+									</div>
+								</div>
+								
+								<h3>Account</h3>
+								
+								<div class="form-group">
+									<label class="control-label col-sm-2" for="solde">First Disposit:</label>
+									<div class="col-sm-8">
+										<f:textarea path="compte.solde" class="form-control" />
+									</div>
+									<div class="col-sm-2">
+										<f:errors path="compte.solde" cssClass="errors"></f:errors>
 									</div>
 								</div>
 								
 								
 								<div class="form-group">
 									<div class="col-sm-12">
-										<input type="submit" value="Modify" class="btn btn-default" />
+										<input type="submit" value="saveClient" class="btn btn-default" />
 									</div>
 								</div>
 							</f:form>

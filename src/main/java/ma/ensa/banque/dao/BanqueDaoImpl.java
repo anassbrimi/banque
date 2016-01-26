@@ -15,8 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
-//import javax.persistence.EntityManager;
-//import javax.persistence.PersistenceContext;
 import ma.ensa.banque.entities.Client;
 import ma.ensa.banque.entities.Compte;
 import ma.ensa.banque.entities.Employe;
@@ -200,14 +198,14 @@ public class BanqueDaoImpl implements IBanqueDao {
 	@Override
 	public List<Compte> getAccountsByEmpl(Long idEmpl) {
 		Query req = (Query) getSession().createQuery(
-				"select c from Compte c where c.employe.idPersonne = :x");
+				"select c from Compte c where c.employe.idPersonne = :x order by c.idCompte desc");
 		req.setParameter("x", idEmpl);
 		return req.list();
 	}
 
 	@Override
 	public List<Compte> getAllAccount() {
-		Query req = (Query) getSession().createQuery("select c from Compte c");
+		Query req = (Query) getSession().createQuery("select c from Compte c order by c.idCompte desc");
 		return req.list();
 	}
 
@@ -246,19 +244,25 @@ public class BanqueDaoImpl implements IBanqueDao {
 
 	@Override
 	public List<Operation> getOperationsByClient(Long idClient) {
-		List<Operation> operations = new ArrayList<Operation>();
-		List<Compte> comptes = getAccountsByClient(idClient);
-		for (Compte c : comptes) {
-			operations.addAll(getOperationsByAccount(c.getIdCompte()));
-		}
-		return operations;
+//		List<Operation> operations = new ArrayList<Operation>();
+//		List<Compte> comptes = getAccountsByClient(idClient);
+//		for (Compte c : comptes) {
+//			operations.addAll(getOperationsByAccount(c.getIdCompte()));
+//		}
+//	
+//		return operations;
+		Query req = getSession()
+				.createQuery(
+						"select o from Operation o where o.compte.client.idPersonne = :x ");
+		req.setParameter("x", idClient);
+		return req.list();
 	}
 
 	@Override
 	public List<Operation> getOperationsByAccount(Long idCompte) {
 		Query req = getSession()
 				.createQuery(
-						"select o from Operation o where o.compte.idCompte = :x order by o.dateOperation");
+						"select o from Operation o where o.compte.idCompte = :x order by o.idOp desc");
 		req.setParameter("x", idCompte);
 		return req.list();
 	}

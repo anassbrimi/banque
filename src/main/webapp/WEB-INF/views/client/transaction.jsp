@@ -30,7 +30,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 
-<title>Transactions</title>
+<title>Espace Client - Transactions</title>
 </head>
 <body>
 	<div id="wrapper">

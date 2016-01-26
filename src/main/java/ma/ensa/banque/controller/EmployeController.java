@@ -11,7 +11,6 @@ import ma.ensa.banque.entities.Operation;
 import ma.ensa.banque.model.BanqueForm;
 import ma.ensa.banque.service.IBanqueService;
 
-import org.springframework.asm.commons.Method;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -58,7 +57,6 @@ public class EmployeController {
 	@RequestMapping(value = "/searchClient", method = RequestMethod.POST)
 	public String searchClient(Model model, @RequestParam String keywords) {
 		List<Client> clts = service.readClientsByKeyWord(keywords);
-
 		model.addAttribute("client", new Client());
 		model.addAttribute("clients", clts);
 		return "employe/clients";
@@ -67,7 +65,7 @@ public class EmployeController {
 	@RequestMapping(value = "/consultClient")
 	public String consultClient(@Valid Long idCli, Model model, BanqueForm bf) {
 		this.chargerCpte(bf, idCli);
-		model.addAttribute("banqueForm", bf);
+		model.addAttribute("banqueForm", this.chargerCpte(bf, idCli));
 		return "employe/details";
 	}
 
@@ -97,10 +95,76 @@ public class EmployeController {
 		this.chargerCpte(bf, bf.getClient().getIdPersonne());
 		return "employe/details";
 	}
+	
+	@RequestMapping(value = "/addClient")
+	public String addClient(Model model) {
+		BanqueForm bf1 = new BanqueForm();
+		bf1.setClient(new Client());
+		bf1.setCompte(new Compte());
+		model.addAttribute("banqueForm", bf1);
+		return "employe/addClient";
+	}
+	
+	@RequestMapping(value = "/saveClient")
+	public String saveClient(Model model, BanqueForm bf) {
+		User userS = (User) SecurityContextHolder.getContext()
+				.getAuthentication().getPrincipal();
+		String name = userS.getUsername();
+		ma.ensa.banque.entities.User user = service.readUserByUserName(name);
+		Employe emp = service.readEmployeById(service
+				.readPersonneByUser(user.getIdUser()).getIdPersonne());
+		Client c = bf.getClient();
+		service.saveClient(c);
+		service.saveAccount(bf.getCompte(), c.getIdPersonne(), emp.getIdPersonne());
+		
+		return "employe/addClient";
+	}
+	
+	
+	@RequestMapping(value = "/accounts")
+	public String getAccounts(Model model) {
+		User userS = (User) SecurityContextHolder.getContext()
+				.getAuthentication().getPrincipal();
+		String name = userS.getUsername();
+		ma.ensa.banque.entities.User user = service.readUserByUserName(name);
+		Employe emp = service.readEmployeById(service
+				.readPersonneByUser(user.getIdUser()).getIdPersonne());
+		List<Compte> cpts = service.readAccountsByEmpl(emp.getIdPersonne());
+		List<Compte> cpts1 = service.readAllAccount();
+		model.addAttribute("OpenedAccounts", cpts);
+		model.addAttribute("OtherAccounts", cpts1);
+		
+		return "employe/accounts";
+	}
+	
+	@RequestMapping(value = "/transactions")
+	public String gettransactions(Model model) {
+		User userS = (User) SecurityContextHolder.getContext()
+				.getAuthentication().getPrincipal();
+		String name = userS.getUsername();
+		ma.ensa.banque.entities.User user = service.readUserByUserName(name);
+		Employe emp = service.readEmployeById(service
+				.readPersonneByUser(user.getIdUser()).getIdPersonne());
 
-	public void chargerCpte(BanqueForm bf, Long idCli) {
+		
+		List<Operation> opts = service.readOperationsByEmployee(emp.getIdPersonne());
+		List<Operation> opts1 = service.readAllOperations();
+		model.addAttribute("transactionsDone", opts);
+		model.addAttribute("allTransactions", opts1);
+		
+		return "employe/transactions";
+	}
+	
+	
+	
+	
+	
+
+	public BanqueForm chargerCpte(BanqueForm bf, Long idCli) {
 		try {
+			
 			Client c = service.readClientById(idCli);
+			System.out.println(c.getNomPersonne()+"*********************************************");
 			Compte cpt = service.readAccountsByClient(idCli).get(0);
 			List<Operation> ops = service.readOperationsByAccount(cpt.getIdCompte());
 			bf.setClient(c);
@@ -116,6 +180,7 @@ public class EmployeController {
 		} catch (Exception e) {
 			bf.setException(e.getMessage());
 		}
+		return bf;
 	}
 
 }

@@ -36,7 +36,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 
-<title>Espace Client</title>
+<title>Espace Employe - Home</title>
 </head>
 <body >
 	
@@ -50,6 +50,7 @@
 				<li class="sidebar-brand"><a href="#"> Project </a></li>
 				<li ><a href="home"><i class="fa fa-home"></i>
 						Home</a></li>
+						<li><a href="addClient"><i class="fa fa-plus"></i> Add Client</a></li>
 						<li><a href="clients"><i class="fa fa-users"></i>
 						Clients</a></li>
 				<li><a href="accounts"><i class="fa fa-credit-card"></i> Accounts</a></li>
@@ -91,7 +92,7 @@
 											</div>
 										</div>
 									</div>
-									<a href="transaction">
+									<a href="accounts">
 										<div class="panel-footer">
 											<span class="pull-left">View Details</span> <span
 												class="pull-right"><i
@@ -116,7 +117,7 @@
 											</div>
 										</div>
 									</div>
-									<a href="cashRetracted">
+									<a href="transactions">
 										<div class="panel-footer">
 											<span class="pull-left">View Details</span> <span
 												class="pull-right"><i

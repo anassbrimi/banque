@@ -1,7 +1,10 @@
 package ma.ensa.banque.test;
 
+import java.util.List;
+
 import ma.ensa.banque.dao.IBanqueDao;
 import ma.ensa.banque.entities.Client;
+import ma.ensa.banque.entities.Operation;
 import ma.ensa.banque.service.IBanqueService;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -25,11 +28,11 @@ public class Test {
 		// System.out.println("*******************************************");
 		// }
 		//
-		// service.verser(2000, (long) 4, (long) 10);
-		// service.verser(2000, (long) 5, (long) 10);
-		// service.retirer(100, (long) 4, (long) 10);
-		// service.retirer(100, (long) 5, (long) 10);
-		// service.virement(5000, (long) 5, (long) 4, (long) 10);
+		 service.verser(2000, (long) 4, (long) 13);
+		 service.verser(2000, (long) 5, (long) 13);
+		 service.retirer(100, (long) 4, (long) 13);
+		 service.retirer(100, (long) 5, (long) 13);
+		 service.virement(5000, (long) 5, (long) 4, (long) 13);
 		//
 		// List<Compte> cpts1 = dao.getAllAccount();
 		//
@@ -114,12 +117,13 @@ public class Test {
 		// dao.addOperation(new Retrait(155, false), cp.getIdCompte(), (long)4);
 		// cp.setSolde(cp.getSolde() + 155);
 		
-		Client c = dao.getClientById(5L);
-		System.out.println("cc" + c);
-		c.setTelePersonne("AAAA");
-		dao.updateClient(c);
-		System.out.println("cc 2" + c);
-
+//		Client c = dao.getClientById(5L);
+//		System.out.println("cc" + c);
+//		c.setTelePersonne("AAAA");
+//		dao.updateClient(c);
+//		System.out.println("cc 2" + c);
+		
+		
 	}
 
 }
