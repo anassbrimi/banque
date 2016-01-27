@@ -118,7 +118,7 @@
 
 	<task:scheduled-tasks>
 		<task:scheduled ref="batchLauncher" method="run"
-			cron=" 0 0 0 * * *" />
+			cron=" * * * */1 * *" />
 	</task:scheduled-tasks>
 
 	<task:annotation-driven />
