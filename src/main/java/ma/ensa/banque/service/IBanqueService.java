@@ -56,6 +56,7 @@ public interface IBanqueService {
 		public void verser(double mt, Long idCompte, Long codeEmp);
 		public void retirer(double mt, Long idCompte, Long codeEmp);
 		public void virement(double mt, Long idCompte1, Long idCompte2,Long codeEmp);
+		public List<Operation> readAllOperationsByFailed();
 		
 		//Gestion Des Roles
 		public Role saveRole(Role r);

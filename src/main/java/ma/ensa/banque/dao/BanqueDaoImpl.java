@@ -270,14 +270,14 @@ public class BanqueDaoImpl implements IBanqueDao {
 	@Override
 	public List<Operation> getOperationsByEmployee(Long idEmpl) {
 		Query req = getSession().createQuery(
-				"select o from Operation o where o.employe.idPersonne = :x");
+				"select o from Operation o where o.employe.idPersonne = :x order by o.idOp desc");
 		req.setParameter("x", idEmpl);
 		return req.list();
 	}
 
 	@Override
 	public List<Operation> getAllOperations() {
-		Query req = getSession().createQuery("select o from Operation o");
+		Query req = getSession().createQuery("select o from Operation o order by o.idOp desc");
 		return req.list();
 	}
 
@@ -285,8 +285,19 @@ public class BanqueDaoImpl implements IBanqueDao {
 	public List<Operation> getOperationsByFailed(Long idCompte) {
 		Query req = getSession()
 				.createQuery(
-						"select o from Operation o where o.compte.idCompte = :x and o.statut=:y order by o.dateOperation");
+						"select o from Operation o where o.compte.idCompte = :x and o.statut=:y order by o.idOp");
 		req.setParameter("x", idCompte);
+		req.setParameter("y", false);
+		return req.list();
+		
+	}
+	
+	
+	@Override
+	public List<Operation> getAllOperationsByFailed() {
+		Query req = getSession()
+				.createQuery(
+						"select o from Operation o where  o.statut=:y order by o.idOp");
 		req.setParameter("y", false);
 		return req.list();
 	}
@@ -392,6 +403,8 @@ public class BanqueDaoImpl implements IBanqueDao {
 		req.setParameter("x", name);
 		return (User) req.list().get(0);
 	}
+
+
 
 	// ***********************************************************************************************************************************
 

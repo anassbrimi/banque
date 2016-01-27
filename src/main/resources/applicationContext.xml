@@ -2,7 +2,10 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:context="http://www.springframework.org/schema/context" xmlns:s="http://www.springframework.org/schema/security"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:batch="http://www.springframework.org/schema/batch"
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
@@ -36,31 +39,12 @@
 		</property>
 		<property name="packagesToScan" value="ma.ensa.banque.entities"></property>
 	</bean>
-	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-	<!-- <bean id="persistenceUnitManager" -->
-	<!-- class="org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager"> -->
-	<!-- <property name="persistenceXmlLocations"> -->
-	<!-- <list> -->
-	<!-- <value>classpath:META-INF/persistence.xml</value> -->
-	<!-- </list> -->
-	<!-- </property> -->
-	<!-- <property name="defaultDataSource" ref="dataSource" /> -->
-	<!-- </bean> -->
 
-	<!-- <bean id="entityManagerFactory" -->
-	<!-- class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"> -->
-	<!-- <property name="persistenceUnitManager" ref="persistenceUnitManager"></property> -->
-	<!-- <property name="persistenceUnitName" value="BANQUE"></property> -->
-	<!-- </bean> -->
-
-	<!-- <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"> -->
-	<!-- <property name="entityManagerFactory" ref="entityManagerFactory"></property> -->
-	<!-- </bean> -->
-
-	<!-- <tx:annotation-driven transaction-manager="transactionManager" /> -->
-	<tx:annotation-driven/>
+	<tx:annotation-driven />
 	<context:annotation-config></context:annotation-config>
 
 	<bean id="myAuthenticationSuccessHandler"
@@ -89,9 +73,65 @@
 		</s:authentication-provider>
 	</s:authentication-manager>
 
+
+
+	<bean id="jobRepository"
+		class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean">
+		<property name="transactionManager" ref="transactionManager" />
+	</bean>
+
+	<bean id="jobLauncher"
+		class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
+		<property name="jobRepository" ref="jobRepository" />
+	</bean>
+
+	<job id="importOps" xmlns="http://www.springframework.org/schema/batch">
+		<step id="readWriteOperation">
+			<tasklet>
+				<chunk reader="operationReaderCSV" processor="operationProcessor"
+					writer="operationWriter" commit-interval="1" />
+			</tasklet>
+		</step>
+	</job>
+
+
+	<bean id="operationReaderCSV" class="org.springframework.batch.item.file.FlatFileItemReader">
+		<property name="resource" value="ma/ensa/banque/input/Operations.txt" />
+		<property name="lineMapper">
+			<bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
+				<property name="lineTokenizer">
+					<bean
+						class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer">
+						<property name="delimiter" value="," />
+						<property name="names" value="compte,statut,montant" />
+					</bean>
+				</property>
+				<property name="fieldSetMapper">
+					<bean
+						class="org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper">
+						<property name="targetType" value="ma.ensa.banque.entities.Operation" />
+					</bean>
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+	<task:scheduled-tasks>
+		<task:scheduled ref="batchLauncher" method="run"
+			cron=" 0 0 0 * * *" />
+	</task:scheduled-tasks>
+
+	<task:annotation-driven />
+
+
+
+
+
+
+
 </beans>
 
-
+<!-- -->
 
 
 

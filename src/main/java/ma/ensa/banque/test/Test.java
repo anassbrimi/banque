@@ -122,6 +122,10 @@ public class Test {
 //		c.setTelePersonne("AAAA");
 //		dao.updateClient(c);
 //		System.out.println("cc 2" + c);
+		List<Operation> ops = service.readOperationsByFailed(1L);
+		Operation op =ops.get(0);
+		op.setStatut(true);
+		service.mergeOperation(op);
 		
 		
 	}

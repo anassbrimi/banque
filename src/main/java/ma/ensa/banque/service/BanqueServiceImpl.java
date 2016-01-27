@@ -297,6 +297,12 @@ public class BanqueServiceImpl implements IBanqueService {
 		return dao.getAccountsByEmpl(idEmpl);
 	}
 
+	@Override
+	public List<Operation> readAllOperationsByFailed() {
+		// TODO Auto-generated method stub
+		return dao.getAllOperationsByFailed();
+	}
+
 
 
 }

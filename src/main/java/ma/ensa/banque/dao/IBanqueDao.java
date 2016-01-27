@@ -51,6 +51,7 @@ public interface IBanqueDao {
 	public List<Operation> getOperationsByEmployee(Long idEmpl);
 	public List<Operation> getOperationsByFailed(Long idCompte );
 	public List<Operation> getAllOperations();
+	public List<Operation> getAllOperationsByFailed();
 	
 	//Gestion Des Roles
 	public Role addRole(Role r);
