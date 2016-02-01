@@ -170,13 +170,6 @@ public class EmployeController {
 			bf.setClient(c);
 			bf.setCompte(cpt);
 			bf.setOperations(ops);
-			// int pos = bf.getNbLignes() * bf.getPage();
-			// List<Operation> ops = metier.consulterOperations(bf.getCode(),
-			// pos,
-			// bf.getNbLignes());
-			// bf.setOperations(ops);
-			// long nbOp = metier.getNombreOperations(bf.getCode());
-			// bf.setNombrePages((int) (nbOp / bf.getNbLignes()) + 1);
 		} catch (Exception e) {
 			bf.setException(e.getMessage());
 		}

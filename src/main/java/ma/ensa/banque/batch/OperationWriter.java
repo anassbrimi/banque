@@ -26,7 +26,7 @@ public class OperationWriter implements ItemWriter<Operation> {
 		
 		
 		for (Operation op : items) {
-			service.verser(op.getMontant(), op.getCompte().getIdCompte(), op.getCompte().getEmploye().getIdPersonne());
+			service.retirer(op.getMontant(), op.getCompte().getIdCompte(), op.getCompte().getEmploye().getIdPersonne());
 		}
 		
 		

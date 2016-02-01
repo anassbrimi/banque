@@ -1,11 +1,16 @@
 package ma.ensa.banque.dao;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import ma.ensa.banque.entities.Client;
+import ma.ensa.banque.entities.Compte;
+import ma.ensa.banque.entities.Employe;
+import ma.ensa.banque.entities.Operation;
 import ma.ensa.banque.entities.Personne;
+import ma.ensa.banque.entities.Role;
+import ma.ensa.banque.entities.User;
 import ma.ensa.banque.utilities.IApplicationManager;
 
 import org.hibernate.Query;
@@ -15,18 +20,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
-import ma.ensa.banque.entities.Client;
-import ma.ensa.banque.entities.Compte;
-import ma.ensa.banque.entities.Employe;
-import ma.ensa.banque.entities.Operation;
-import ma.ensa.banque.entities.Role;
-import ma.ensa.banque.entities.User;
 
 @Repository("banqueDao")
 public class BanqueDaoImpl implements IBanqueDao {
-
-	// @PersistenceContext
-	// private EntityManager em;
 
 	@Autowired
 	public IApplicationManager managementUtil;
@@ -68,23 +64,7 @@ public class BanqueDaoImpl implements IBanqueDao {
 
 	@Override
 	public void updateClient(Client c) {
-		// Cache cs = (Cache) getSession().getEntityManagerFactory().getCache();
-		// cs.containsEntity(Client.class, )
-		// getSession().getEntityManagerFactory().getCache().evictAll();
-
 		getSession().update(c);
-		// Client tmp = this.getClientById(c.getIdPersonne());
-		// SystgetSession().out.println("01 " + tmp);
-		// getSession().refresh(tmp);
-
-		// Session s = (Session) getSession().getDelegate();
-		// s = s.getSessionFactory().openSession();
-		// if(s.isOpen()){
-		// s.evict(c);
-		// s.update(c);
-		// }
-		// SystgetSession().out.println("" + c);
-
 	}
 
 	@Override

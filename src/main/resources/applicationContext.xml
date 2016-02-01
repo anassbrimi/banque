@@ -47,6 +47,8 @@
 	<tx:annotation-driven />
 	<context:annotation-config></context:annotation-config>
 
+
+
 	<bean id="myAuthenticationSuccessHandler"
 		class="ma.ensa.banque.security.MySimpleUrlAuthenticationSuccessHandler"></bean>
 
@@ -58,10 +60,7 @@
 			authentication-success-handler-ref="myAuthenticationSuccessHandler" />
 		<s:logout logout-success-url="/login" delete-cookies="JSESSIONID" />
 	</s:http>
-
-
-
-
+	
 	<s:authentication-manager>
 		<s:authentication-provider>
 			<s:password-encoder hash="bcrypt"></s:password-encoder>
@@ -73,6 +72,7 @@
 		</s:authentication-provider>
 	</s:authentication-manager>
 
+<!-- 
 
 
 	<bean id="jobRepository"
@@ -118,11 +118,11 @@
 
 	<task:scheduled-tasks>
 		<task:scheduled ref="batchLauncher" method="run"
-			cron=" * * * */1 * *" />
+			cron=" 0 0 0 */1 * *" />
 	</task:scheduled-tasks>
 
 	<task:annotation-driven />
-
+ -->
 
 
 
@@ -131,7 +131,7 @@
 
 </beans>
 
-<!-- -->
+
 
 
 

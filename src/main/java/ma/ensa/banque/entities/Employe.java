@@ -29,8 +29,7 @@ public class Employe extends Personne{
 	}
 
 	public Employe(String nomPersonne, String prenomPersonne,
-			String telePersonne, String adressePersonne, String emailPersonne,
-			String password) {
+			String telePersonne, String adressePersonne, String emailPersonne) {
 		super(nomPersonne, prenomPersonne, telePersonne, adressePersonne,
 				emailPersonne);
 		// TODO Auto-generated constructor stub
@@ -39,7 +38,7 @@ public class Employe extends Personne{
 
 	public Employe(String nomPersonne, String prenomPersonne,
 			String telePersonne, String adressePersonne, String emailPersonne,
-			String password, String fonction) {
+			 String fonction) {
 		super(nomPersonne, prenomPersonne, telePersonne, adressePersonne,
 				emailPersonne);
 		this.fonction = fonction;

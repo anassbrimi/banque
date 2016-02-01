@@ -76,7 +76,7 @@
 				<div class="col-lg-8 col-lg-offset-2">
 
 					<table class="table table-hover">
-						<caption>Accounts Opened</caption>
+						<caption>Opened Accounts </caption>
 						<thead>
 							<tr>
 								<th>DATE</th>

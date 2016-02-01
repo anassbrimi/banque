@@ -1,13 +1,11 @@
 package ma.ensa.banque.test;
 
-import java.util.List;
-
 import ma.ensa.banque.dao.IBanqueDao;
-import ma.ensa.banque.entities.Client;
-import ma.ensa.banque.entities.Operation;
 import ma.ensa.banque.service.IBanqueService;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class Test {
 
@@ -28,11 +26,12 @@ public class Test {
 		// System.out.println("*******************************************");
 		// }
 		//
-		 service.verser(2000, (long) 4, (long) 13);
-		 service.verser(2000, (long) 5, (long) 13);
-		 service.retirer(100, (long) 4, (long) 13);
-		 service.retirer(100, (long) 5, (long) 13);
-		 service.virement(5000, (long) 5, (long) 4, (long) 13);
+//		 service.verser(2000, (long) 1, (long) 2);
+//		 service.verser(2000, (long) 1, (long) 2);
+//		 service.retirer(100, (long) 1, (long) 2);
+//		 service.retirer(100, (long) 1, (long) 2);
+//		 service.retirer(100, (long) 1, (long) 2);
+		 //service.virement(5000, (long) 5, (long) 4, (long) 13);
 		//
 		// List<Compte> cpts1 = dao.getAllAccount();
 		//
@@ -122,10 +121,16 @@ public class Test {
 //		c.setTelePersonne("AAAA");
 //		dao.updateClient(c);
 //		System.out.println("cc 2" + c);
-		List<Operation> ops = service.readOperationsByFailed(1L);
-		Operation op =ops.get(0);
-		op.setStatut(true);
-		service.mergeOperation(op);
+//		List<Operation> ops = service.readOperationsByFailed(1L);
+//		Operation op =ops.get(0);
+//		op.setStatut(true);
+//		service.mergeOperation(op);
+		 
+		 
+		 PasswordEncoder encoder = new BCryptPasswordEncoder();
+		 
+		 System.out.println(encoder.encode("test"));
+		
 		
 		
 	}
