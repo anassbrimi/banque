@@ -39,7 +39,7 @@ public class EmployeController {
 		List<Compte> cpts = service.readAccountsByEmpl(emp.getIdPersonne());
 		List<Operation> operations = service.readOperationsByEmployee(emp
 				.getIdPersonne());
-		model.addAttribute("ComptesOuver", cpts);
+		model.addAttribute("ComptesOuver", cpts.subList(0, 5));
 		model.addAttribute("OpsEff", operations.subList(0, 5));
 		model.addAttribute("nombreCompteOuvr", cpts.size());
 		model.addAttribute("nombreOpsEff", operations.size());

@@ -303,6 +303,14 @@ public class BanqueServiceImpl implements IBanqueService {
 		return dao.getAllOperationsByFailed();
 	}
 
+	@Override
+	public Operation retirerRandom(double mt, Long idCompte, Long codeEmp) {
+		// TODO Auto-generated method stub
+		Operation op = dao.addOperation(new Retrait(mt, false), idCompte, codeEmp);
+		return op ;
+		
+	}
+
 
 
 }

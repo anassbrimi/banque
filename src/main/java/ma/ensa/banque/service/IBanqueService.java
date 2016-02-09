@@ -55,6 +55,7 @@ public interface IBanqueService {
 		public List<Operation> readAllOperations();
 		public void verser(double mt, Long idCompte, Long codeEmp);
 		public void retirer(double mt, Long idCompte, Long codeEmp);
+		public Operation retirerRandom(double mt, Long idCompte, Long codeEmp);
 		public void virement(double mt, Long idCompte1, Long idCompte2,Long codeEmp);
 		public List<Operation> readAllOperationsByFailed();
 		

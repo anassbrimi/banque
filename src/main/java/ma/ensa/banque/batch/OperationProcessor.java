@@ -14,14 +14,12 @@ public class OperationProcessor implements ItemProcessor<Operation, Operation> {
 		// TODO Auto-generated method stub
 		Operation operationOutput = null;
 		
-		if(operationInput.isStatut()== false){
+
 			
 			operationOutput = new Operation();
-			operationOutput.setMontant(operationInput.getMontant());
-			operationOutput.setCompte(operationInput.getCompte());
-			operationOutput.setStatut(operationInput.isStatut());
+			operationOutput.setIdOp(operationInput.getIdOp());
 			
-		}
+		
 		return operationOutput;
 	}
 

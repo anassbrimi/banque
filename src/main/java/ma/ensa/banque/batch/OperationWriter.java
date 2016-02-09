@@ -17,17 +17,17 @@ public class OperationWriter implements ItemWriter<Operation> {
 	@Override
 	public void write(List<? extends Operation> items) throws Exception {
 		// TODO Auto-generated method stub
-		List<Operation> ops = service.readAllOperationsByFailed();
-		for(Operation op:ops){
-			op.setStatut(true);
-			op.getCompte().setSolde(op.getCompte().getSolde()+op.getMontant());
-			service.mergeOperation(op);
-		}
 		
 		
 		for (Operation op : items) {
-			service.retirer(op.getMontant(), op.getCompte().getIdCompte(), op.getCompte().getEmploye().getIdPersonne());
+			Operation op1 = new Operation();
+			op1 = service.readOperationById(op.getIdOp());
+			op1.setStatut(true);
+			service.mergeOperation(op1);
 		}
+		
+		Filecontrole fc = new Filecontrole();
+		fc.cleanFile();
 		
 		
 

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="f"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -28,7 +29,25 @@
 <script src="${espaceClientJs}"></script>
 <script src="${AngJs}"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+	$(function() {
+		mafunction(elm);
 
+	});
+
+	function mafunction(elm) {
+		if (elm.value == "VIR") {
+			$("#ver").show();
+			$("#vir").show();
+			$("#ret").show();
+		} else {
+			$("#ver").show();
+			$("#vir").hide();
+			$("#ret").show();
+		}
+		;
+	}
+</script>
 
 <title>Espace Client - Transactions</title>
 </head>
@@ -59,6 +78,48 @@
 					class="hamb-bottom"></span>
 			</button>
 			<div class="container">
+			
+			<div class="container">
+				<f:form modelAttribute="banqueForm" action="saveOperation"
+					method="post">
+					<f:hidden path="client.idPersonne" />
+					<f:hidden path="compte.idCompte" />
+					<table class="table">
+						<tr>
+							<td>CREDIT :<f:radiobutton path="typeOperation" value="VER"
+									onclick="mafunction(this)" /></td>
+							<td>DEBIT :<f:radiobutton path="typeOperation" value="RET"
+									onclick="mafunction(this)" /></td>
+							<td>TRANSFER :<f:radiobutton path="typeOperation"
+									value="VIR" id="VIR" onclick="mafunction(this)" /></td>
+						</tr>
+
+
+
+						<tr id="ver" style="display: none" class="slideInRight animated">
+							<td>BALANCE :</td>
+							<td><f:input path="montant" /></td>
+							<td><f:errors path="montant"></f:errors></td>
+						</tr>
+
+						<tr id="vir" style="display: none" class="slideInRight animated">
+							<td>TO ACCOUNT :</td>
+							<td><f:input path="code2" /></td>
+							<td><f:errors path="code2"></f:errors></td>
+						</tr>
+
+
+						<tr id="ret" style="display: none" class="slideInRight animated">
+							<td colspan="3"><input type="submit" value="SAVE"
+								class="btn btn-primary" name="action" />
+						</tr>
+
+
+
+
+					</table>
+				</f:form>
+			</div>
 
 				<div class="row">
 
@@ -83,7 +144,7 @@
 												</tr>
 											</thead>
 											<tbody>
-												<c:forEach items="${retraits}" var="op">
+												<c:forEach items="${versements}" var="op">
 													<tr>
 
 														<td><b>DEBIT</b></td>
@@ -120,7 +181,7 @@
 												</tr>
 											</thead>
 											<tbody>
-												<c:forEach items="${versements}" var="op">
+												<c:forEach items="${retraits}" var="op">
 													<tr>
 
 														<td><b>CREDIT</b></td>
